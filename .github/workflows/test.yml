@@ -1,0 +1,13 @@
+name: Shell checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  policy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Syntax and policy tests
+        run: |
+          sh -n overlay/init overlay/usr/libexec/overlay-x86 overlay/usr/sbin/firstboot tests/policy.sh tests/virtual.sh
+          sh tests/policy.sh
